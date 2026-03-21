@@ -21,8 +21,11 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@slack/bolt": "^4.6.0",
+    "@slack/types": "^2.20.1",
     "better-sqlite3": "^11.8.1",
     "cron-parser": "^5.5.0",
+    "discord.js": "^14.25.1",
     "pino": "^9.6.0",
     "pino-pretty": "^13.0.0",
     "yaml": "^2.8.2",
