@@ -1,6 +1,6 @@
 ---
 name: ai-changelog
-description: Fetch the past week of changelog entries from Anthropic, Google Gemini, and OpenAI, generate a beautiful HTML dashboard, deploy it to Vercel, and return the URL. Use when the user asks for AI changelog, AI updates summary, recent changes from AI providers, or weekly AI news.
+description: Fetch the past week of changelog entries from Anthropic, Google Gemini, and OpenAI, generate a beautiful HTML dashboard, deploy it to Vercel, and return the URL. Use when the user says "差分", "diff", "changelog", "AI更新", "最近の変更", "AI changelog", "AI updates", "weekly AI news", or asks about recent changes from AI providers.
 allowed-tools: Bash(agent-browser:*)
 ---
 
@@ -86,13 +86,55 @@ Create a single `index.html` file with all CSS inlined. The design should be:
 - OpenAI: `#000000` (black)
 - Google Gemini: `#4285F4` (blue)
 
-**Style guidelines:**
-- System font stack: `-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
-- Card-based layout with subtle shadows (`box-shadow: 0 2px 8px rgba(0,0,0,0.1)`)
-- Rounded corners (`border-radius: 12px`)
+**Design philosophy — avoid generic AI aesthetics:**
+
+You tend to produce safe, predictable designs. Do NOT do that here. Make this feel like a hand-crafted editorial dashboard, not a template.
+
+<frontend_aesthetics>
+Typography:
+- Load distinctive fonts from Google Fonts. Never use Inter, Roboto, Arial, or system fonts.
+- Good choices: Bricolage Grotesque for headings, JetBrains Mono for dates/tags, Crimson Pro for body.
+- Use extreme weight contrasts (200 vs 800), size jumps of 3x+.
+- One hero font used decisively across the page.
+
+Color & Theme:
+- Commit to a cohesive dark theme with rich depth. No white backgrounds.
+- Use a dominant dark background (#0a0a0f or similar deep navy/charcoal) with vibrant provider accent colors.
+- Provider colors should POP against the dark background:
+  - Anthropic: coral/amber gradient
+  - OpenAI: electric green or sharp white
+  - Gemini: bright blue with subtle glow
+- Use CSS variables for consistency.
+
+Motion & Animation:
+- Staggered fade-in on page load using CSS animation-delay (each card appears sequentially).
+- Subtle hover effects on cards (slight lift + glow in provider color).
+- One well-orchestrated entrance animation beats scattered micro-interactions.
+
+Backgrounds:
+- Layer CSS gradients for atmosphere. Add a subtle grid pattern or geometric texture.
+- Each provider section can have a faint radial glow in its brand color.
+- Create depth with layered backgrounds, not flat solid colors.
+
+Avoid these cliches:
+- Purple gradients on white backgrounds
+- Generic card layouts with identical shadows
+- Cookie-cutter Bootstrap/Tailwind default aesthetics
+- Timid, evenly-distributed color palettes
+</frontend_aesthetics>
+
+**Layout guidelines:**
 - Responsive: max-width container, stacks on mobile
 - Each entry card shows: date badge, title, description
 - If an entry has a link, make the title clickable
+
+**Source links (important):**
+- Each provider section header must include a link to the original changelog page:
+  - Anthropic: `https://platform.claude.com/docs/en/release-notes/overview`
+  - OpenAI: `https://developers.openai.com/changelog/`
+  - Gemini: `https://ai.google.dev/gemini-api/docs/changelog`
+- Style the link as a subtle "View original changelog →" button or text link next to the provider name
+- Individual entries should also link to their specific page if the original changelog provides per-entry URLs
 
 **Keep it concise:** Summarize long descriptions. The page should be scannable.
 
