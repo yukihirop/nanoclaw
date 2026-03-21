@@ -148,3 +148,7 @@ Error: Command "vite build" exited with 127 ===> だめだ。。。
 ---
 
 https://my-landing-page-qmz9fh09q-yukihirops-projects.vercel.app/#
+
+---
+
+yes
