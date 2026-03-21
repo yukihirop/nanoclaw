@@ -156,3 +156,7 @@ yes
 ---
 
 anthropic・gemini・openaiのchangelogのサイトを見て、1週間分の差分をわかりやすいwebサイトにまとめてvercelにデプロイするためのskillを作ってほしいな！プランモードで計画して作って
+
+---
+
+commit
