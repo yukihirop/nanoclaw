@@ -106,16 +106,16 @@ server.tool(
       name,
       files: files.map(f => ({
         file: f.file,
-        data: f.data,
+        data: Buffer.from(f.data).toString('base64'),
+        encoding: 'base64',
       })),
     };
 
-    if (projectSettings) {
-      body.projectSettings = {};
-      if (projectSettings.framework) body.projectSettings.framework = projectSettings.framework;
-      if (projectSettings.buildCommand) body.projectSettings.buildCommand = projectSettings.buildCommand;
-      if (projectSettings.outputDirectory) body.projectSettings.outputDirectory = projectSettings.outputDirectory;
-    }
+    body.projectSettings = {
+      framework: projectSettings?.framework || null,
+      buildCommand: projectSettings?.buildCommand ?? '',
+      outputDirectory: projectSettings?.outputDirectory ?? '',
+    };
 
     const data = await vercelFetch('/v13/deployments', {
       method: 'POST',
