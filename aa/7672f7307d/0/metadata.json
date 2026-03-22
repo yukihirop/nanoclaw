@@ -1,0 +1,38 @@
+{
+  "cli_version": "0.5.1",
+  "checkpoint_id": "aa7672f7307d",
+  "session_id": "09366525-4e7f-4b63-a90c-0c0f46f80fbc",
+  "strategy": "manual-commit",
+  "created_at": "2026-03-22T02:00:52.10608Z",
+  "branch": "develop",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".env.example",
+    "container/skills/youtube-analytics/SKILL.md",
+    "src/container-runner.ts"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-4-6[1m]",
+  "turn_id": "b4b364d0f78f",
+  "checkpoint_transcript_start": 453,
+  "transcript_lines_at_start": 453,
+  "token_usage": {
+    "input_tokens": 31,
+    "cache_creation_tokens": 8192,
+    "cache_read_tokens": 1860972,
+    "output_tokens": 5026,
+    "api_call_count": 19
+  },
+  "session_metrics": {
+    "turn_count": 13
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-03-22T02:00:51.853514Z",
+    "agent_lines": 137,
+    "human_added": 9,
+    "human_modified": 2,
+    "human_removed": 0,
+    "total_committed": 148,
+    "agent_percentage": 92.56756756756756
+  }
+}

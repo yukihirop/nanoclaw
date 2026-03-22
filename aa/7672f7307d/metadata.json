@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.5.1",
+  "checkpoint_id": "aa7672f7307d",
+  "strategy": "manual-commit",
+  "branch": "develop",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".env.example",
+    "container/skills/youtube-analytics/SKILL.md",
+    "src/container-runner.ts"
+  ],
+  "sessions": [
+    {
+      "metadata": "/aa/7672f7307d/0/metadata.json",
+      "transcript": "/aa/7672f7307d/0/full.jsonl",
+      "content_hash": "/aa/7672f7307d/0/content_hash.txt",
+      "prompt": "/aa/7672f7307d/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 31,
+    "cache_creation_tokens": 8192,
+    "cache_read_tokens": 1860972,
+    "output_tokens": 5026,
+    "api_call_count": 19
+  }
+}
