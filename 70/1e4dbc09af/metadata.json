@@ -1,0 +1,26 @@
+{
+  "cli_version": "0.5.1",
+  "checkpoint_id": "701e4dbc09af",
+  "strategy": "manual-commit",
+  "branch": "develop",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "container/skills/jupyter-deploy/SKILL.md",
+    "container/skills/youtube-analytics/SKILL.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/70/1e4dbc09af/0/metadata.json",
+      "transcript": "/70/1e4dbc09af/0/full.jsonl",
+      "content_hash": "/70/1e4dbc09af/0/content_hash.txt",
+      "prompt": "/70/1e4dbc09af/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 41,
+    "cache_creation_tokens": 15237,
+    "cache_read_tokens": 4019623,
+    "output_tokens": 7387,
+    "api_call_count": 33
+  }
+}
