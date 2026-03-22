@@ -1,0 +1,9 @@
+中間報告をollamaで動いているllmにさせることって現実的ではない？
+
+---
+
+「株価分析して AAPL」って送ったけど分析進んでる？
+
+---
+
+https://jupyter-aapl-analysis-4dx1h6pw0-yukihirops-projects.vercel.app/ ===> 分析コードが表示されていない。Tool Usage Reportがない
