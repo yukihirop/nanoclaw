@@ -77,6 +77,12 @@ Use the `NotebookEdit` tool to create an `.ipynb` file. Set kernel to `python3`.
 7. **Performance Over Time** (code+viz): Views vs publish date scatter/line
 8. **Summary** (markdown): Key findings and insights
 
+**Japanese font support:** The container has `Noto Sans CJK JP` installed. Always set the font in the setup cell for proper Japanese rendering in charts:
+```python
+import matplotlib
+matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
+```
+
 Adapt the structure based on the user's specific request. For example:
 - Channel comparison → side-by-side metrics
 - Single video deep dive → engagement metrics, related videos
@@ -85,8 +91,10 @@ Adapt the structure based on the user's specific request. For example:
 ## Step 4: Execute the Notebook
 
 ```bash
-jupyter execute --kernel_name=python3 <notebook-file>.ipynb
+jupyter nbconvert --to notebook --execute --inplace <notebook-file>.ipynb
 ```
+
+Do NOT use `jupyter execute` as it may not persist outputs to the file.
 
 If execution fails due to API errors:
 1. Check if `YOUTUBE_API_KEY` is set

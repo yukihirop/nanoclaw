@@ -22,6 +22,11 @@ Use the `NotebookEdit` tool to create a `.ipynb` file in the working directory.
 - Import cells: Group all imports in one cell near the top
 - Logic cells: Break the work into logical steps, each in its own cell
 - Visualization cells: Use matplotlib/pandas plotting; always call `plt.show()` or use inline display
+- **Japanese font support:** The container has `Noto Sans CJK JP` installed. When using matplotlib with Japanese text, always set the font in your setup cell:
+  ```python
+  import matplotlib
+  matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
+  ```
 - Summary cell: Final markdown cell summarizing findings
 - Only use libraries available in the container: `numpy`, `pandas`, `matplotlib` (standard library modules are also available)
 - If the user needs a library that is not installed, tell them it is unavailable and suggest an alternative using the installed libraries
@@ -33,10 +38,10 @@ Use the `NotebookEdit` tool to create a `.ipynb` file in the working directory.
 Run the notebook to generate outputs (charts, tables, printed values):
 
 ```bash
-jupyter execute --kernel_name=python3 <notebook-file>.ipynb
+jupyter nbconvert --to notebook --execute --inplace <notebook-file>.ipynb
 ```
 
-This modifies the notebook in-place, embedding outputs into each cell.
+This executes the notebook and writes outputs back in-place. Do NOT use `jupyter execute` as it may not persist outputs to the file.
 
 **If execution fails:**
 1. Read the error from the output
