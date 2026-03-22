@@ -1,0 +1,9 @@
+jupyterのnotebookを作成して、成果物をnbconvertかなんかでhtmlに変換して、vercelにデプロイするためのskillを作ってほしいな。プランモードで計画して。
+
+---
+
+yes
+
+---
+
+discordからyoutubeの分析をさせたいな。なんか命令考えて
