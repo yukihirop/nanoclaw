@@ -5,6 +5,7 @@ import {
   Message,
   Partials,
   TextChannel,
+  ThreadChannel,
 } from 'discord.js';
 
 import { ASSISTANT_NAME, TRIGGER_PATTERN } from '../config.js';
@@ -30,6 +31,7 @@ export class DiscordChannel implements Channel {
   private client: Client | null = null;
   private opts: DiscordChannelOpts;
   private botToken: string;
+  private lastMessageId: Map<string, string> = new Map();
 
   constructor(botToken: string, opts: DiscordChannelOpts) {
     this.botToken = botToken;
@@ -153,6 +155,9 @@ export class DiscordChannel implements Channel {
         return;
       }
 
+      // Track the latest message ID for thread creation
+      this.lastMessageId.set(chatJid, msgId);
+
       // Deliver message — startMessageLoop() will pick it up
       this.opts.onMessage(chatJid, {
         id: msgId,
@@ -208,14 +213,41 @@ export class DiscordChannel implements Channel {
       }
 
       const textChannel = channel as TextChannel;
+      const messageId = this.lastMessageId.get(jid);
+
+      // Try to reply in a thread on the original message
+      let target: TextChannel | ThreadChannel = textChannel;
+      if (messageId) {
+        try {
+          const originalMessage =
+            await textChannel.messages.fetch(messageId);
+          if (originalMessage.thread) {
+            target = originalMessage.thread;
+          } else {
+            const threadName = text
+              .slice(0, 50)
+              .replace(/\n/g, ' ')
+              .replace(/[*_~`|]/g, '');
+            target = await originalMessage.startThread({
+              name: threadName || 'Response',
+              autoArchiveDuration: 60,
+            });
+          }
+        } catch (err) {
+          logger.debug(
+            { jid, err },
+            'Failed to create thread, falling back to channel',
+          );
+        }
+      }
 
       // Discord has a 2000 character limit per message — split if needed
       const MAX_LENGTH = 2000;
       if (text.length <= MAX_LENGTH) {
-        await textChannel.send(text);
+        await target.send(text);
       } else {
         for (let i = 0; i < text.length; i += MAX_LENGTH) {
-          await textChannel.send(text.slice(i, i + MAX_LENGTH));
+          await target.send(text.slice(i, i + MAX_LENGTH));
         }
       }
       logger.info({ jid, length: text.length }, 'Discord message sent');
