@@ -47,3 +47,7 @@ commit & push
 ---
 
 送ってみました。確認してみて！Tool Usage Reportがない気がする
+
+---
+
+commit & push
