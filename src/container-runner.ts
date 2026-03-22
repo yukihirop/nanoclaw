@@ -248,6 +248,12 @@ function buildContainerArgs(
     args.push('-e', `YOUTUBE_API_KEY=${envSecrets.YOUTUBE_API_KEY}`);
   }
 
+  // Pass max agent turns limit (default 50 in agent-runner)
+  const maxTurns = process.env.MAX_AGENT_TURNS;
+  if (maxTurns) {
+    args.push('-e', `MAX_AGENT_TURNS=${maxTurns}`);
+  }
+
   // Runtime-specific args for host gateway resolution
   args.push(...hostGatewayArgs());
 

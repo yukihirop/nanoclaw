@@ -365,6 +365,7 @@ async function runQuery(
   let lastAssistantUuid: string | undefined;
   let messageCount = 0;
   let resultCount = 0;
+  const maxTurns = parseInt(process.env.MAX_AGENT_TURNS || '50', 10);
 
   // Load global CLAUDE.md as additional system context (shared across all groups)
   const globalClaudeMdPath = '/workspace/global/CLAUDE.md';
@@ -442,6 +443,18 @@ async function runQuery(
     messageCount++;
     const msgType = message.type === 'system' ? `system/${(message as { subtype?: string }).subtype}` : message.type;
     log(`[msg #${messageCount}] type=${msgType}`);
+
+    // Guard against runaway loops — hard-stop after maxTurns
+    if (messageCount >= maxTurns) {
+      log(`Max turns reached (${maxTurns}), stopping agent`);
+      writeOutput({
+        status: 'error',
+        result: `⚠️ エージェントが${maxTurns}ターンに達したため停止しました。処理が複雑すぎるか、ループしている可能性があります。`,
+        newSessionId
+      });
+      stream.end();
+      break;
+    }
 
     if (message.type === 'assistant' && 'uuid' in message) {
       lastAssistantUuid = (message as { uuid: string }).uuid;
