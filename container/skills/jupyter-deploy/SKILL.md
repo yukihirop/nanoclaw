@@ -22,11 +22,12 @@ Use the `NotebookEdit` tool to create a `.ipynb` file in the working directory.
 - Import cells: Group all imports in one cell near the top
 - Logic cells: Break the work into logical steps, each in its own cell
 - Visualization cells: Use matplotlib/pandas plotting; always call `plt.show()` or use inline display
-- **Japanese font support:** The container has `Noto Sans CJK JP` installed. When using matplotlib with Japanese text, always set the font in your setup cell:
+- **Matplotlib setup:** Always include this in your setup cell:
   ```python
   import matplotlib
-  matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
+  matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'  # Japanese font support
   ```
+  Use the default matplotlib style (white background, black text). Do NOT use dark themes — they are hard to read in notebook HTML output.
 - Summary cell: Final markdown cell summarizing findings
 - Only use libraries available in the container: `numpy`, `pandas`, `matplotlib` (standard library modules are also available)
 - If the user needs a library that is not installed, tell them it is unavailable and suggest an alternative using the installed libraries

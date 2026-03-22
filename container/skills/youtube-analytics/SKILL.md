@@ -77,11 +77,12 @@ Use the `NotebookEdit` tool to create an `.ipynb` file. Set kernel to `python3`.
 7. **Performance Over Time** (code+viz): Views vs publish date scatter/line
 8. **Summary** (markdown): Key findings and insights
 
-**Japanese font support:** The container has `Noto Sans CJK JP` installed. Always set the font in the setup cell for proper Japanese rendering in charts:
+**Matplotlib setup:** Always include this in the setup cell:
 ```python
 import matplotlib
-matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
+matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'  # Japanese font support
 ```
+Use the default matplotlib style (white background, black text). Do NOT use dark themes — they are hard to read in notebook HTML output.
 
 Adapt the structure based on the user's specific request. For example:
 - Channel comparison → side-by-side metrics
