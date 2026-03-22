@@ -219,8 +219,7 @@ export class DiscordChannel implements Channel {
       let target: TextChannel | ThreadChannel = textChannel;
       if (messageId) {
         try {
-          const originalMessage =
-            await textChannel.messages.fetch(messageId);
+          const originalMessage = await textChannel.messages.fetch(messageId);
           if (originalMessage.thread) {
             target = originalMessage.thread;
           } else {
