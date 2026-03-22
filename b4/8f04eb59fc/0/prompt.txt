@@ -1,0 +1,29 @@
+https://jupyter-youtube-analysis-cvq5p1258-yukihirops-projects.vercel.app/ ===> そういや作り直したやつできていたがnotebook感がないんだよね。。
+
+---
+
+nanoclawを再起動してくれ！
+
+---
+
+ヒカキンのチャンネル分析してもらってますが、データ多すぎてトークン無駄遣いしてしまうか？
+
+---
+
+今どんな感じ？
+
+---
+
+もう分析は完了いている？中断しない方がいいか？
+
+---
+
+claudeからdiscordにpptxを送ることもできたりする？
+
+---
+
+https://youtube-hikakin-h3le1luhh-yukihirops-projects.vercel.app/ ===> まだnotebookらしさがないですね。
+
+---
+
+デフォルトでコード表示をしてほしい！
