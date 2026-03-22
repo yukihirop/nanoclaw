@@ -96,12 +96,12 @@ If execution fails due to API errors:
 ## Step 5: Convert to HTML
 
 ```bash
-jupyter nbconvert --to html --template classic --no-input <notebook-file>.ipynb
+jupyter nbconvert --to html --template classic <notebook-file>.ipynb
 ```
 
 Always use `--template classic` for standalone HTML that renders correctly outside JupyterLab.
 
-If the user wants to see the code, omit `--no-input` (but keep `--template classic`).
+By default, code cells are shown (notebook style with `In [n]:` prompts). If the user explicitly asks to hide the code, add `--no-input`.
 
 ## Step 6: Deploy to Vercel
 
