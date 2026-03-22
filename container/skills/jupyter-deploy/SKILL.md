@@ -47,12 +47,14 @@ This modifies the notebook in-place, embedding outputs into each cell.
 ## Step 4: Convert to HTML
 
 ```bash
-jupyter nbconvert --to html --no-input <notebook-file>.ipynb
+jupyter nbconvert --to html --template classic --no-input <notebook-file>.ipynb
 ```
+
+**IMPORTANT:** Always use `--template classic`. The default `lab` template uses JupyterLab CSS variables (`--jp-*`) that are undefined outside JupyterLab, causing the page to render with no styling. The `classic` template produces self-contained, standalone HTML that looks correct in any browser.
 
 The `--no-input` flag hides code cells, showing only outputs and markdown. This produces a cleaner result for sharing.
 
-If the user explicitly asks to include the code, omit the `--no-input` flag.
+If the user explicitly asks to include the code, omit the `--no-input` flag (but always keep `--template classic`).
 
 The output file will be `<notebook-file>.html` in the same directory.
 
