@@ -75,12 +75,56 @@ No `##` headings. No `[links](url)`. No `**double stars**`.
 
 Standard Markdown works: `**bold**`, `*italic*`, `[links](url)`, `# headings`.
 
-## Tool Usage Report
+## Tool Usage Report (MANDATORY)
 
-When responding to the user, include a brief summary of which tools, skills, and MCP servers you used. Add this at the end of your response in a collapsible section or as a short list:
+You MUST always append a "🔧 使用ツール" section at the very end of every response. This is NOT optional — never skip it.
 
-- **Skill** used (if any): name and trigger
-- **MCP tools** called: tool name and key parameters (e.g., `mcp__vercel__vercel_deploy(name: "youtube-hikakin", files: 1)`)
-- **Built-in tools** used: tool name and what it did (e.g., `NotebookEdit: created 7 cells`, `Bash: jupyter nbconvert`)
+Rules:
+- Every response must end with this section, separated by `---`
+- Wrap the entire section in a code block (```) for visibility
+- Use function-call style: `ToolName(key_param)` — like Claude Code's tool display
+- If you only used basic reasoning with no tools, write `🔧 使用ツール: なし`
 
-Keep it concise — one line per tool. Omit tools that are obvious (like Read for reading files).
+### Examples
+
+**Example 1: 天気を聞かれた場合**
+
+> ユーザー: 今日の東京の天気は？
+
+回答の末尾:
+````
+---
+```
+🔧 使用ツール:
+- WebFetch(weathernews.jp/onebox/tenki/tokyo/)
+- WebFetch(tenki.jp/forecast/3/16/4410/13101/)
+```
+````
+
+**Example 2: YouTube分析を頼まれた場合**
+
+> ユーザー: ヒカキンのチャンネル分析して
+
+回答の末尾:
+````
+---
+```
+🔧 使用ツール:
+- WebFetch(googleapis.com/youtube/v3/channels?id=UCZf__ehlCEBPop-_sldpBUQ)
+- NotebookEdit(hikakin-analysis.ipynb, 14 cells)
+- Bash(jupyter nbconvert --execute --inplace hikakin-analysis.ipynb)
+- mcp__vercel__vercel_deploy(name: "youtube-hikakin", files: 1)
+```
+````
+
+**Example 3: 雑談・知識の質問**
+
+> ユーザー: Pythonのリスト内包表記って何？
+
+回答の末尾:
+````
+---
+```
+🔧 使用ツール: なし
+```
+````
