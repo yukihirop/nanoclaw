@@ -239,10 +239,13 @@ function buildContainerArgs(
     args.push('-e', 'CLAUDE_CODE_OAUTH_TOKEN=placeholder');
   }
 
-  // Pass Vercel API token if configured
-  const envSecrets = readEnvFile(['VERCEL_API_TOKEN']);
+  // Pass API tokens if configured
+  const envSecrets = readEnvFile(['VERCEL_API_TOKEN', 'YOUTUBE_API_KEY']);
   if (envSecrets.VERCEL_API_TOKEN) {
     args.push('-e', `VERCEL_API_TOKEN=${envSecrets.VERCEL_API_TOKEN}`);
+  }
+  if (envSecrets.YOUTUBE_API_KEY) {
+    args.push('-e', `YOUTUBE_API_KEY=${envSecrets.YOUTUBE_API_KEY}`);
   }
 
   // Runtime-specific args for host gateway resolution
