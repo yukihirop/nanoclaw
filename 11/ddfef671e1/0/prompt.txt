@@ -1,0 +1,17 @@
+命令送ったけどちゃんと動いてそう？
+
+---
+
+ごめん続きお願い
+
+---
+
+discordにstreamで返すみたいにするとapiの使用制限に引っかかりやすくなって微妙なんだっけ？
+
+---
+
+claude api側の制限に引っかかりやすいのかと。
+
+---
+
+https://jupyter-youtube-analysis-gxxz0r350-yukihirops-projects.vercel.app/ ===> notebook感がないのですが。。なぜこうなった？
