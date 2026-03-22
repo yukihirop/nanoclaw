@@ -26,6 +26,20 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Python3 + Jupyter for notebook execution and HTML conversion
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    && pip3 install --no-cache-dir --break-system-packages \
+    jupyter \
+    nbconvert \
+    ipykernel \
+    numpy \
+    pandas \
+    matplotlib \
+    && python3 -m ipykernel install --name python3 --display-name "Python 3" \
+    && rm -rf /var/lib/apt/lists/* /root/.cache/pip
+
 # Set Chromium path for agent-browser
 ENV AGENT_BROWSER_EXECUTABLE_PATH=/usr/bin/chromium
 ENV PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium
