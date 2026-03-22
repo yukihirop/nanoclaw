@@ -74,3 +74,13 @@ No `##` headings. No `[links](url)`. No `**double stars**`.
 ### Discord channels (folder starts with `discord_`)
 
 Standard Markdown works: `**bold**`, `*italic*`, `[links](url)`, `# headings`.
+
+## Tool Usage Report
+
+When responding to the user, include a brief summary of which tools, skills, and MCP servers you used. Add this at the end of your response in a collapsible section or as a short list:
+
+- **Skill** used (if any): name and trigger
+- **MCP tools** called: tool name and key parameters (e.g., `mcp__vercel__vercel_deploy(name: "youtube-hikakin", files: 1)`)
+- **Built-in tools** used: tool name and what it did (e.g., `NotebookEdit: created 7 cells`, `Bash: jupyter nbconvert`)
+
+Keep it concise — one line per tool. Omit tools that are obvious (like Read for reading files).
