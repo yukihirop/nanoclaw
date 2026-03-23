@@ -73,6 +73,14 @@ For each provider:
 
 ## Step 4: Generate HTML
 
+**IMPORTANT — 言語: 日本語で生成すること**
+
+サイト全体を日本語で作成してください。英語で書かないでください。
+- タイトル: 「AI更新情報」または「AIチェンジログ」
+- 日付表記: 「2026年3月15日〜3月22日」形式
+- セクション見出し、ボタン、フッターすべて日本語
+- 更新内容の説明も日本語に翻訳（元が英語でも）
+
 Create a single `index.html` file with all CSS inlined. The design should be:
 
 **Layout:**
@@ -86,42 +94,23 @@ Create a single `index.html` file with all CSS inlined. The design should be:
 - OpenAI: `#000000` (black)
 - Google Gemini: `#4285F4` (blue)
 
-**Design philosophy — avoid generic AI aesthetics:**
+**Design philosophy — use ui-ux-pro-max skill:**
 
-You tend to produce safe, predictable designs. Do NOT do that here. Make this feel like a hand-crafted editorial dashboard, not a template.
+Before writing any HTML, generate a design system using the ui-ux-pro-max skill:
 
-<frontend_aesthetics>
-Typography:
-- Load distinctive fonts from Google Fonts. Never use Inter, Roboto, Arial, or system fonts.
-- Good choices: Bricolage Grotesque for headings, JetBrains Mono for dates/tags, Crimson Pro for body.
-- Use extreme weight contrasts (200 vs 800), size jumps of 3x+.
-- One hero font used decisively across the page.
+```bash
+python3 skills/ui-ux-pro-max/scripts/search.py "dashboard dark mode editorial news" --design-system -p "AI Changelog"
+```
 
-Color & Theme:
-- Commit to a cohesive dark theme with rich depth. No white backgrounds.
-- Use a dominant dark background (#0a0a0f or similar deep navy/charcoal) with vibrant provider accent colors.
-- Provider colors should POP against the dark background:
-  - Anthropic: coral/amber gradient
-  - OpenAI: electric green or sharp white
-  - Gemini: bright blue with subtle glow
-- Use CSS variables for consistency.
+Apply the generated design system (typography, colors, effects) to the HTML output.
 
-Motion & Animation:
-- Staggered fade-in on page load using CSS animation-delay (each card appears sequentially).
-- Subtle hover effects on cards (slight lift + glow in provider color).
-- One well-orchestrated entrance animation beats scattered micro-interactions.
-
-Backgrounds:
-- Layer CSS gradients for atmosphere. Add a subtle grid pattern or geometric texture.
-- Each provider section can have a faint radial glow in its brand color.
-- Create depth with layered backgrounds, not flat solid colors.
-
-Avoid these cliches:
-- Purple gradients on white backgrounds
-- Generic card layouts with identical shadows
-- Cookie-cutter Bootstrap/Tailwind default aesthetics
-- Timid, evenly-distributed color palettes
-</frontend_aesthetics>
+**Additional requirements for this dashboard:**
+- Provider brand colors must be preserved:
+  - Anthropic: `#D97757` (coral)
+  - OpenAI: `#000000` (black)
+  - Gemini: `#4285F4` (blue)
+- Use staggered fade-in animation on page load
+- Hover effects on cards with provider-colored glow
 
 **Layout guidelines:**
 - Responsive: max-width container, stacks on mobile
@@ -162,14 +151,14 @@ Respond to the user with:
 
 Example response:
 ```
-AI Changelog deployed!
+AI更新情報をデプロイしました！
 
 URL: https://ai-changelog-xxx.vercel.app
 
-Summary:
-- Anthropic: 3 updates
-- OpenAI: 5 updates
-- Gemini: 2 updates
+まとめ:
+- Anthropic: 3件
+- OpenAI: 5件
+- Gemini: 2件
 
-Period: Mar 15 – Mar 22, 2026
+期間: 2026年3月15日〜22日
 ```
