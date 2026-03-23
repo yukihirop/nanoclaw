@@ -37,6 +37,7 @@ export class SlackChannel implements Channel {
   private outgoingQueue: Array<{ jid: string; text: string }> = [];
   private flushing = false;
   private userNameCache = new Map<string, string>();
+  private lastThreadTs: Map<string, string> = new Map();
 
   private opts: SlackChannelOpts;
 
@@ -79,10 +80,6 @@ export class SlackChannel implements Channel {
 
       if (!msg.text) return;
 
-      // Threaded replies are flattened into the channel conversation.
-      // The agent sees them alongside channel-level messages; responses
-      // always go to the channel, not back into the thread.
-
       const jid = `slack:${msg.channel}`;
       const timestamp = new Date(parseFloat(msg.ts) * 1000).toISOString();
       const isGroup = msg.channel_type !== 'im';
@@ -119,6 +116,12 @@ export class SlackChannel implements Channel {
           content = `@${ASSISTANT_NAME} ${content}`;
         }
       }
+
+      // Track the thread timestamp so replies go to the same thread.
+      // If the message is already in a thread, use thread_ts; otherwise use ts
+      // to start a new thread on the original message.
+      const threadTs = (msg as GenericMessageEvent).thread_ts || msg.ts;
+      this.lastThreadTs.set(jid, threadTs);
 
       this.opts.onMessage(jid, {
         id: msg.ts,
@@ -169,14 +172,17 @@ export class SlackChannel implements Channel {
     }
 
     try {
+      const thread_ts = this.lastThreadTs.get(jid);
+
       // Slack limits messages to ~4000 characters; split if needed
       if (text.length <= MAX_MESSAGE_LENGTH) {
-        await this.app.client.chat.postMessage({ channel: channelId, text });
+        await this.app.client.chat.postMessage({ channel: channelId, text, thread_ts });
       } else {
         for (let i = 0; i < text.length; i += MAX_MESSAGE_LENGTH) {
           await this.app.client.chat.postMessage({
             channel: channelId,
             text: text.slice(i, i + MAX_MESSAGE_LENGTH),
+            thread_ts,
           });
         }
       }
