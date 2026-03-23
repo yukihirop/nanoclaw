@@ -176,7 +176,11 @@ export class SlackChannel implements Channel {
 
       // Slack limits messages to ~4000 characters; split if needed
       if (text.length <= MAX_MESSAGE_LENGTH) {
-        await this.app.client.chat.postMessage({ channel: channelId, text, thread_ts });
+        await this.app.client.chat.postMessage({
+          channel: channelId,
+          text,
+          thread_ts,
+        });
       } else {
         for (let i = 0; i < text.length; i += MAX_MESSAGE_LENGTH) {
           await this.app.client.chat.postMessage({
